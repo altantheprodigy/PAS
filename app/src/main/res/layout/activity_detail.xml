@@ -1,19 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-
-    android:layout_height="wrap_content">
-    <ImageView
-        android:id="@+id/news_poster"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="20dp"
-        tools:src="@tools:sample/avatars"
-        tools:ignore="MissingConstraints" />
+    android:layout_height="match_parent"
+    tools:context=".DetailActivity">
     <TextView
         android:id="@+id/news_name"
         android:layout_width="0dp"
@@ -27,10 +18,8 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/news_poster"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
-
-
     <TextView
 
         android:id="@+id/news_release_date"
@@ -43,16 +32,28 @@
         android:textStyle="italic"
         android:layout_marginStart="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/news_poster"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/news_name"
         tools:text="@tools:sample/lorem/random" />
 
+    <ImageView
+        android:id="@+id/news_poster"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/news_release_date"
+        android:layout_marginTop="10dp"
+        tools:src="@tools:sample/avatars"/>
 
-
-
-
+    <TextView
+        android:id="@+id/news_desc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/news_name"
+        android:textSize="11dp"
+        app:layout_constraintStart_toStartOf="@+id/news_name"
+        app:layout_constraintTop_toBottomOf="@+id/news_poster"
+        tools:text="@tools:sample/lorem" />
 
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

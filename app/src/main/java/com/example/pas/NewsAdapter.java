@@ -1,5 +1,6 @@
 package com.example.pas;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,12 +31,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         return new ViewHolder(view);
     }
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView tvNewsTitle, tvNewsDesc,  tvNewsPub;
+        private final TextView tvNewsTitle, tvNewsPub;
         private final ImageView imgNewsPoster;
         public ViewHolder(View view) {
             super(view);
             // nyambungin data movie ke layout menggunakan id
-            tvNewsDesc = view.findViewById(R.id.news_desc);
+
             tvNewsTitle = view.findViewById(R.id.news_name);
             tvNewsPub = view.findViewById(R.id.news_release_date);
             imgNewsPoster = view.findViewById(R.id.news_poster);
@@ -48,7 +49,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
         NewsItem news = localDataSet.get(position);
         String judul = news.getTitle();
-        String desc = news.getDescription();
         String pubDate = news.getPubDate();
 
 
@@ -62,10 +62,20 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-        viewHolder.tvNewsDesc.setText(desc);
+
         viewHolder.tvNewsTitle.setText(judul);
         viewHolder.tvNewsPub.setText(pubDate);
         Picasso.get().load(news.getThumbnail()).into(viewHolder.imgNewsPoster);
+
+
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(viewHolder.itemView.getContext(), DetailActivity.class);
+                intent.putExtra("news_id",String.valueOf(news.getThumbnail()));
+                viewHolder.itemView.getContext().startActivity(intent);
+            }
+        });
 
 
     }
