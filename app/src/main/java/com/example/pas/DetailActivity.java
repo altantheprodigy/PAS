@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.example.pas.databinding.ActivityDetailBinding;
@@ -27,50 +28,22 @@ public class DetailActivity extends AppCompatActivity {
         binding = ActivityDetailBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-
+        // Mendapatkan intent yang memulai activity ini
         Intent intent = getIntent();
-        String newsId = intent.getStringExtra("news_id");
 
-        getDetailNews(newsId);
-
-
-
-    }
-    private void getDetailNews(String newsId){
-    ApiService service = ApiClient.getRetrofitInstance().create(ApiService.class);
-    Call<NewsItem> call= service.getDetailNews(newsId);
-    call.enqueue(new Callback<NewsItem>() {
-        @Override
-        public void onResponse(Call<NewsItem> call, Response<NewsItem> response) {
-            NewsItem news = response.body();
-            setDataUi(news);
-        }
-
-        @Override
-        public void onFailure(Call<NewsItem> call, Throwable t) {
-
-        }
-    });
-    }
-    private void setDataUi(NewsItem news) {
-    binding.newsName.setText(news.getTitle());
-    binding.newsDesc.setText(news.getDescription());
+// Mengambil data yang dikirimkan melalui intent
+        String nama = intent.getStringExtra("nama");
+        String upload = intent.getStringExtra("upload");
+        String thumbnail = intent.getStringExtra("thumbnail");
+        String desc = intent.getStringExtra("desc");
 
 
-        String releaseDate = news.getPubDate();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyy-mm-dd");
-        Date date;
-        try {
-            date = simpleDateFormat.parse(releaseDate);
-            simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
-            releaseDate = simpleDateFormat.format(date);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-        binding.newsReleaseDate.setText(getString(Integer.parseInt(releaseDate)));
-        Picasso.get().load(news.getThumbnail()).into(binding.newsPoster);
+        binding.newsName.setText(nama);
+        binding.newsReleaseDate.setText(upload);
+        binding.newsDesc.setText(desc);
+
+// Menggunakan library Picasso untuk memuat gambar dari URL ke ImageView
+        Picasso.get().load(thumbnail).into(binding.newsPoster);
 
     }
-
-
 }

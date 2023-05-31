@@ -10,6 +10,4 @@ public interface ApiService {
     @GET("cnn/olahraga")
     Call<ResponseNewsSport> getNewsSport();
 
-    @GET("cnn/{news_id}")
-    Call<NewsItem> getDetailNews(@Path("news_id") String newsId);
 }

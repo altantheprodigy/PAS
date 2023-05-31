@@ -68,12 +68,18 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         Picasso.get().load(news.getThumbnail()).into(viewHolder.imgNewsPoster);
 
 
+        String finalPubDate = pubDate;
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(viewHolder.itemView.getContext(), DetailActivity.class);
-                intent.putExtra("news_id",String.valueOf(news.getThumbnail()));
+
+                Intent intent = new Intent(viewHolder.itemView.getContext(),DetailActivity.class);
+                intent.putExtra("nama", judul);
+                intent.putExtra("upload", finalPubDate);
+                intent.putExtra("thumbnail", news.getThumbnail());
+                intent.putExtra("desc", news.getDescription());
                 viewHolder.itemView.getContext().startActivity(intent);
+
             }
         });
 

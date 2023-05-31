@@ -13,22 +13,23 @@ import com.example.pas.databinding.ActivitySplashScreenBinding;
 
 
 public class SplashScreen extends AppCompatActivity {
-   private ActivitySplashScreenBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivitySplashScreenBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
-        setContentView(view);
 
+        if (getSupportActionBar() != null){
+            getSupportActionBar().hide();
+        }
+        setContentView(R.layout.activity_splash_screen);
 
-        Handler handler = new Handler();
+        final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashScreen.this, MainActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finish();
-            }},5500);
+            }
+        }, 2500L);
     }
 }
